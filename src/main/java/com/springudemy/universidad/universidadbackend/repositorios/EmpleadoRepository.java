@@ -1,6 +1,7 @@
 package com.springudemy.universidad.universidadbackend.repositorios;
 
 
+import com.springudemy.universidad.universidadbackend.modelo.entidades.Alumno;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.Empleado;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.Persona;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.enumeradores.TipoEmpleado;

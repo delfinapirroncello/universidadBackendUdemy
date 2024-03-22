@@ -1,5 +1,6 @@
 package com.springudemy.universidad.universidadbackend.repositorios;
 
+import com.springudemy.universidad.universidadbackend.modelo.entidades.Alumno;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.Persona;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

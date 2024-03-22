@@ -1,5 +1,6 @@
 package com.springudemy.universidad.universidadbackend.modelo.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -29,12 +30,13 @@ public class Carrera implements Serializable {
             mappedBy = "carrera",
             fetch = FetchType.LAZY
     )
+    @JsonIgnoreProperties({"carrera"})
     private Set<Alumno> alumnos;
     @ManyToMany(
             mappedBy = "carreras",
             fetch = FetchType.LAZY
     )
-
+    @JsonIgnoreProperties({"carreras"})
     private Set<Profesor> profesores;
 
     public Carrera() {

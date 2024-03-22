@@ -18,6 +18,8 @@ public class Pabellon implements Serializable {
     private Double mt2;
     @Column(name = "nombre_pabellon")
     private String nombre;
+    @Column(name = "nombre_localidad")
+    private String localidad;
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "codigoPostal", column = @Column(name = "codigo_postal")),
@@ -43,6 +45,7 @@ public class Pabellon implements Serializable {
         this.mt2 = mt2;
         this.nombre = nombre;
         this.direccion = direccion;
+        this.localidad = localidad;
     }
 
     public Integer getId() {
@@ -71,6 +74,10 @@ public class Pabellon implements Serializable {
 
     public Direccion getDireccion() {
         return direccion;
+    }
+
+    public String getLocalidad(String localidad) {
+        return localidad;
     }
 
     public void setDireccion(Direccion direccion) {

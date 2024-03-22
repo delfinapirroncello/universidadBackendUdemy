@@ -1,6 +1,8 @@
 package com.springudemy.universidad.universidadbackend.servicios.implementaciones;
 
+import com.springudemy.universidad.universidadbackend.modelo.entidades.Alumno;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.Persona;
+import com.springudemy.universidad.universidadbackend.repositorios.AlumnoRepository;
 import com.springudemy.universidad.universidadbackend.repositorios.PersonaRepository;
 import com.springudemy.universidad.universidadbackend.servicios.contratos.PersonaDAO;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +28,16 @@ public class PersonaDAOImpl extends GenericoDAOImpl<Persona, PersonaRepository> 
         return repository.buscarPorDni(dni);
     }
 
-    @Override
-    public Iterable<Persona> buscarPersonaPorApellido(String apellido) {
-        return null;
-    }
 
     @Override
     @Transactional(readOnly = true)
     public Iterable<Persona> buscarPersonasPorApellido(String apellido) {
         return repository.buscarPersonasPorApellido(apellido);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Iterable<Persona> findAll() {
+        return repository.findAll();
     }
 }

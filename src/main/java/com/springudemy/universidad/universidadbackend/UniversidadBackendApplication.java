@@ -10,10 +10,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.List;
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackages = "com.springudemy.universidad.universidadbackend.repositorios")
 @ComponentScan(basePackages = "com.springudemy.universidad.universidadbackend")
 public class UniversidadBackendApplication {
 

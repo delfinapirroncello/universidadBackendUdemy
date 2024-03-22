@@ -22,4 +22,5 @@ public interface PersonaRepository extends CrudRepository<Persona, Integer> {
     Iterable<Persona> buscarPersonasPorApellido(String apellido);
 
 
+
 }

@@ -2,14 +2,10 @@ package com.springudemy.universidad.universidadbackend.repositorios;
 
 import com.springudemy.universidad.universidadbackend.datos.DatosDummy;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.Carrera;
-import org.hibernate.mapping.List;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
-
-
-import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
 
 @DataJpaTest
 class CarreraRepositoryTest {
@@ -19,9 +15,9 @@ class CarreraRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        carreraRepository.save(DatosDummy.carrera01());
+        carreraRepository.save(DatosDummy.carrera01(false));
         carreraRepository.save(DatosDummy.carrera02());
-        carreraRepository.save(DatosDummy.carrera03());
+        carreraRepository.save(DatosDummy.carrera03(false));
     }
 
     @AfterEach

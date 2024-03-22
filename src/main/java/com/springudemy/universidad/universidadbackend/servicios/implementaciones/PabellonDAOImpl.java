@@ -18,7 +18,7 @@ public class PabellonDAOImpl extends GenericoDAOImpl<Pabellon, PabellonRepositor
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly =true)
     public Iterable<Pabellon> buscarPabellonPorLocalidad(String localidad) {
         return repository.findPabellonByDireccion_Localidad(localidad);
     }
