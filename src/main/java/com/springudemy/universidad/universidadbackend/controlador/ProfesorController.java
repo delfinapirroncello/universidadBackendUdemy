@@ -46,19 +46,21 @@ public class ProfesorController extends PersonaController{
 */
     //actualizar Profesor
     @PutMapping("/update/{id}")
-    public Persona actualizarProfesor(@PathVariable Integer id, @RequestBody Persona profesor){
+    public ResponseEntity<?> actualizarProfesor(@PathVariable Integer id, @RequestBody Persona profesor){
+        Map<String, Object> mensaje = new HashMap<>();
         Persona profesorUpdate = null;
         Optional<Persona> oProfesor = service.findById(id);
         if (!oProfesor.isPresent()){
-            throw new BadRequestException(String.format("Profesor con id %d no existe", id));
+            //throw new BadRequestException(String.format("Profesor con id %d no existe", id));
+            mensaje.put("mensaje", String.format("Profesor con id %d no existe", id));
+            return ResponseEntity.badRequest().body(mensaje);
         }
         profesorUpdate = oProfesor.get();
         profesorUpdate.setNombre(profesor.getNombre());
         profesorUpdate.setApellido(profesor.getApellido());
         profesorUpdate.setDireccion(profesor.getDireccion());
-        return service.save(profesorUpdate);
+        return ResponseEntity.ok(service.save(profesorUpdate));
     }
-
 
     //Eliminar profesor
     @DeleteMapping("/delete/{id}")

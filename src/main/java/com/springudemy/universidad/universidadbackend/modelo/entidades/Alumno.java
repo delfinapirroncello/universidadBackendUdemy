@@ -2,8 +2,10 @@ package com.springudemy.universidad.universidadbackend.modelo.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
+@NotNull(message = "Debe de ingresar un valor")
 @Table(name = "alumnos")
 @PrimaryKeyJoinColumn(name = "persona_id")
 public class Alumno extends Persona{

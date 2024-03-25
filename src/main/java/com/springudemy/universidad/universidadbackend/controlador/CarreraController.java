@@ -3,8 +3,10 @@ package com.springudemy.universidad.universidadbackend.controlador;
 import com.springudemy.universidad.universidadbackend.exception.BadRequestException;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.Carrera;
 import com.springudemy.universidad.universidadbackend.servicios.contratos.CarreraDAO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -29,14 +31,23 @@ public class CarreraController extends GenericController<Carrera, CarreraDAO>{
     }
 */
     @PostMapping
-    public Carrera altaCarrera(@RequestBody Carrera carrera){
-        if (carrera.getCantidadAnios() < 0){
+    public ResponseEntity<?> altaCarrera(@Valid @RequestBody Carrera carrera, BindingResult result){
+        /*if (carrera.getCantidadAnios() < 0){
             throw new BadRequestException("El campo cantidad de años no puede ser negativo");
         }
         if (carrera.getCantidadMaterias() < 0){
             throw new BadRequestException("El campo cantidad de materias no puede ser negativo");
+        }*/
+        //uso del BindingResult para obtener las validaciones realizadas
+        Map<String, Object> validaciones = new HashMap<>();
+
+        if (result.hasErrors()){
+            //vamos a obtener una lista de nuestros errores
+            result.getFieldErrors()
+                    .forEach(error -> validaciones.put(error.getField(), error.getDefaultMessage()));
+            return ResponseEntity.badRequest().body(validaciones);
         }
-        return service.save(carrera);
+        return ResponseEntity.ok(service.save(carrera));
     }
 
     @PutMapping("/{id}")

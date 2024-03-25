@@ -10,6 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "personas")
+
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

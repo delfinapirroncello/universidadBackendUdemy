@@ -2,6 +2,9 @@ package com.springudemy.universidad.universidadbackend.modelo.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,10 +18,14 @@ public class Carrera implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull(message = "Debe de ingresar un valor")
+    @Size(min = 0, max = 80)
     @Column(nullable = false,unique = true, length = 80)
     private String nombre;
+    @Positive(message = "El valor no puede ser negativo")
     @Column(name = "cantidad_materias")
     private Integer cantidadMaterias;
+    @Positive
     @Column(name = "cantidad_anios")
     private Integer cantidadAnios;
     @Column(name = "fecha_alta")

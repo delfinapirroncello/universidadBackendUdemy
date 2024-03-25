@@ -3,6 +3,8 @@ package com.springudemy.universidad.universidadbackend.controlador;
 import com.springudemy.universidad.universidadbackend.exception.BadRequestException;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.Persona;
 import com.springudemy.universidad.universidadbackend.servicios.contratos.GenericoDAO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,13 +42,17 @@ public class GenericController <E, S extends GenericoDAO<E>>{
 
     //obtenerPorId (Id)
     @GetMapping("/{id}")
-    public E obtenerPersonaPorId(@PathVariable("id") Integer id){
+    public ResponseEntity<?> obtenerPersonaPorId(@PathVariable("id") Integer id){
         Optional<E> oPersona = service.findById(id);
+
         if (!oPersona.isPresent()){
-            throw  new BadRequestException(String.format("%s con ID %d no encontrado", nombreEntidad, id));
-        }else {
-            return oPersona.get();
+            //throw  new BadRequestException(String.format("%s con ID %d no encontrado", nombreEntidad, id));
+            Map<String, Object> mensaje = new HashMap<>();
+
+            mensaje.put("mensaje", String.format("%s con ID %d no encontrado", nombreEntidad, id));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensaje);
         }
+        return ResponseEntity.ok(oPersona.get());
     }
 
     //borrarEntidadPorId (Id)

@@ -2,11 +2,13 @@ package com.springudemy.universidad.universidadbackend.modelo.entidades;
 
 import com.springudemy.universidad.universidadbackend.modelo.entidades.enumeradores.TipoEmpleado;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "empleados")
+@Size(min = 0, max = 30)
 @PrimaryKeyJoinColumn(name = "persona_id")
 public class Empleado extends Persona{
     private BigDecimal sueldo;

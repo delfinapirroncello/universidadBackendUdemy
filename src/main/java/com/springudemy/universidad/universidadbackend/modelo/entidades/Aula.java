@@ -2,6 +2,7 @@ package com.springudemy.universidad.universidadbackend.modelo.entidades;
 
 import com.springudemy.universidad.universidadbackend.modelo.entidades.enumeradores.Pizarron;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,11 +17,13 @@ public class Aula implements Serializable {
     private Integer id;
     @Column(name = "numero-aula", nullable = false)
     private Integer nroAula;
+    @Positive(message = "El valor no puede ser negativo")
     @Column(name = "medidas_mtsxmts")
     private String medidas;
     @Column(name = "cantidad_pupitres")
     private Integer cantidadPupitres;
     @Column(name = "tipo_pizarron")
+    @Positive(message = "El valor no puede ser negativo")
     @Enumerated(EnumType.STRING)
     private Pizarron pizarron;
     @Column(name = "fecha_alta")

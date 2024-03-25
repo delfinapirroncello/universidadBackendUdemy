@@ -33,28 +33,41 @@ public class PersonaController extends GenericController<Persona, PersonaDAO> {
 
     //buscar por Apellido
     @GetMapping("/apellido")
-    public List <Persona> buscarPorApellido(@RequestParam String apellido){
+    public ResponseEntity<?> buscarPorApellido(@RequestParam String apellido) {
+        Map<String, Object> mensaje = new HashMap<>();
         List<Persona> personas = (List<Persona>) service.buscarPersonasPorApellido(apellido);
-        if (personas.isEmpty()) throw new BadRequestException(String.format("No se encontro Persona con nombre %s y apellido %s", apellido));
-        return personas;
+        if (personas.isEmpty()){
+            //throw new BadRequestException(String.format("No se encontro Persona con nombre %s y apellido %s", apellido));
+            mensaje.put("mensaje", String.format("No se encontro Persona con nombre %s y apellido %s", apellido));
+        return ResponseEntity.badRequest().body(mensaje);
+    }
+        return ResponseEntity.ok(personas);
     }
 
     //buscar por Dni
     @GetMapping("/dni/{dni}")
-    public Persona buscarPorDni(@PathVariable String dni){
+    public ResponseEntity<?> buscarPorDni(@PathVariable String dni){
+        Map<String, Object> mensaje = new HashMap<>();
         Optional<Persona> oPersona = service.buscarPorDni(dni);
-        if (!oPersona.isPresent()) throw new BadRequestException(String.format("La persona con dni %s no existe",dni));
-        return oPersona.get();
+        if (!oPersona.isPresent()) {
+           // throw new BadRequestException(String.format("La persona con dni %s no existe",dni));
+            mensaje.put("mensaje", String.format("La persona con dni %s no existe",dni));
+            return ResponseEntity.badRequest().body(mensaje);
+        }
+        return ResponseEntity.ok(oPersona.get());
     }
 
     //obtener Por Id
     @GetMapping("/persona/{id}")
-    public Persona obtenerPorId(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> obtenerPorId(@PathVariable("id") Integer id) {
+        Map<String, Object> mensaje = new HashMap<>();
         Optional<Persona> oPersona = service.findById(id);
         if (!oPersona.isPresent()){
-            throw new BadRequestException(String.format("No se encontró Persona con ID %d", id));
+            //throw new BadRequestException(String.format("No se encontró Persona con ID %d", id));
+            mensaje.put("mensaje", String.format("No se encontró Persona con ID %d", id));
+            return ResponseEntity.badRequest().body(mensaje);
         }
-        return oPersona.get();
+        return ResponseEntity.ok(oPersona.get());
     }
 
     //eliminar Por Id
