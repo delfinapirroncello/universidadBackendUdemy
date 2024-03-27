@@ -5,14 +5,18 @@ import com.springudemy.universidad.universidadbackend.modelo.entidades.Carrera;
 import com.springudemy.universidad.universidadbackend.servicios.contratos.CarreraDAO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@Deprecated
 @RestController
 @RequestMapping("/carreras")
+@ConditionalOnProperty(prefix = "app", name = "controller.enable-dto", havingValue = "false")
+
 public class CarreraController extends GenericController<Carrera, CarreraDAO>{
 
     @Autowired
