@@ -1,0 +1,21 @@
+package com.springudemy.universidad.universidadbackend.modelo.dto;
+
+import com.springudemy.universidad.universidadbackend.modelo.entidades.Direccion;
+import com.springudemy.universidad.universidadbackend.modelo.entidades.enumeradores.TipoEmpleado;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+@Setter
+@Getter
+@NoArgsConstructor
+public class EmpleadoDTO extends PersonaDTO{
+
+    private BigDecimal sueldo;
+    private TipoEmpleado tipoEmpleado;
+
+    public EmpleadoDTO(Integer id, String nombre, String apellido, String dni, Direccion direccion) {
+        super(id, nombre, apellido, dni, direccion);
+    }
+}

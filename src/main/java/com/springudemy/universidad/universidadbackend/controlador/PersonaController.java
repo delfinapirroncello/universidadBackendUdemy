@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@Deprecated
 public class PersonaController extends GenericController<Persona, PersonaDAO> {
 
     public PersonaController(PersonaDAO service){

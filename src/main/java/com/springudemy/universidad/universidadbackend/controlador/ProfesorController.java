@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@Deprecated
 @RestController
 @RequestMapping("/profesor")
 public class ProfesorController extends PersonaController{
