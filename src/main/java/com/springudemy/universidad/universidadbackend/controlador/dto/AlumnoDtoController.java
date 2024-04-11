@@ -25,8 +25,7 @@ import java.util.Optional;
 @RequestMapping("/alumnos")
 @ConditionalOnProperty(prefix = "app", name = "controller.enable-dto", havingValue = "true")
 public class AlumnoDtoController extends PersonaDtoController {
-
-
+    
     public AlumnoDtoController(@Qualifier("alumnoDAOImpl") PersonaDAO service, String nombre_entidad, AlumnoMapper alumnoMapper, ProfesorMapper profesorMapper) {
         super(service, "Alumno", alumnoMapper, profesorMapper);
     }
