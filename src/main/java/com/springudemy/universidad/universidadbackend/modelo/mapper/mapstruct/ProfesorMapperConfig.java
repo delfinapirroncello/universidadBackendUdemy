@@ -11,4 +11,5 @@ public interface ProfesorMapperConfig extends PersonaMapperConfig{
 
     @InheritConfiguration(name = "mapPersona")
     void mapProfesor(Profesor profesor, @MappingTarget ProfesorDTO profesorDTO);
+
 }

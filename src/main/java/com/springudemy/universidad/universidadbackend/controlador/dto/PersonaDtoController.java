@@ -6,31 +6,49 @@ import com.springudemy.universidad.universidadbackend.modelo.entidades.Empleado;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.Persona;
 import com.springudemy.universidad.universidadbackend.modelo.entidades.Profesor;
 import com.springudemy.universidad.universidadbackend.modelo.mapper.mapstruct.AlumnoMapper;
-import com.springudemy.universidad.universidadbackend.modelo.mapper.mapstruct.ProfesorMapper;
 import com.springudemy.universidad.universidadbackend.servicios.contratos.PersonaDAO;
+
+import java.util.Optional;
+
+
 
 public class PersonaDtoController extends GenericDtoController<Persona, PersonaDAO> {
 
     protected final AlumnoMapper alumnoMapper;
-    protected final ProfesorMapper profesorMapper;
 
-    public PersonaDtoController(PersonaDAO service, String nombre_entidad, AlumnoMapper alumnoMapper, ProfesorMapper profesorMapper) {
+    public PersonaDtoController(PersonaDAO service, String nombre_entidad, AlumnoMapper alumnoMapper) {
         super(service, nombre_entidad);
         this.alumnoMapper = alumnoMapper;
-        this.profesorMapper = profesorMapper;
     }
 
-
-    public PersonaDTO altaPersona(Persona persona){
+    public PersonaDTO altaPersona(Persona persona) {
         Persona personaEntidad = super.altaEntidad(persona);
         PersonaDTO dto = null;
-        if (personaEntidad instanceof Alumno){
+        if(personaEntidad instanceof Alumno) {
             dto = alumnoMapper.mapAlumno((Alumno) personaEntidad);
-        } else if (personaEntidad instanceof Profesor){
+        } else if (personaEntidad instanceof Profesor) {
             //aplicariamos mapper de profesor
-
         } else if (personaEntidad instanceof Empleado) {
-            //aplicamos el mapper de empleado
+            //aplicamos el mapper de empelado
+        }
+        return dto;
+    }
+
+    public PersonaDTO buscarPersonaPorId(Integer id) {
+        Optional<Persona> oPersona = super.obtenerPorId(id);
+        Persona persona;
+        PersonaDTO dto = null;
+        if(oPersona.isEmpty()){
+            return null;
+        } else {
+            persona = oPersona.get();
+        }
+        if(persona instanceof Alumno) {
+            dto = alumnoMapper.mapAlumno((Alumno) persona);
+        } else if (persona instanceof Profesor) {
+            //aplicariamos mapper de profesor
+        } else if (persona instanceof Empleado) {
+            //aplicamos el mapper de empelado
         }
         return dto;
     }

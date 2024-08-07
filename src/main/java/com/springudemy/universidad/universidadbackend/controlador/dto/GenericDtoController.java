@@ -8,19 +8,20 @@ import org.springframework.validation.BindingResult;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @AllArgsConstructor
-public class GenericDtoController <E, S extends GenericoDAO<E>>{
+public class GenericDtoController <E, S extends GenericoDAO<E>> {
 
     protected final S service;
     protected final String nombre_entidad;
 
     public List<E> obtenerTodos(){
-        return (List<E>)service.findAll();
+        return (List<E>) service.findAll();
     }
 
-    public E obtenerPorId(Integer id){
-        return (E)service.findById(id);
+    public Optional<E> obtenerPorId(Integer id){
+        return (Optional<E>) service.findById(id);
     }
 
     public E altaEntidad(E entidad){

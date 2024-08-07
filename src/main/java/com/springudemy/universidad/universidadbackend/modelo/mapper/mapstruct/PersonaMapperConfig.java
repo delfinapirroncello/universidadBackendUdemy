@@ -8,6 +8,6 @@ import org.mapstruct.MappingTarget;
 @MapperConfig
 public interface PersonaMapperConfig {
 
-    void mapPersona(Persona persona,@MappingTarget PersonaDTO personaDTO);
+    void mapPersona(Persona persona, @MappingTarget PersonaDTO personaDTO);
 
 }

@@ -4,7 +4,8 @@ import jakarta.persistence.Embeddable;
 
 import java.io.Serializable;
 
-@Embeddable  //va a ser un objeto o una clase enbebida dentro de otra,
+
+@Embeddable
 public class Direccion implements Serializable {
 
     private String calle;
@@ -73,4 +74,17 @@ public class Direccion implements Serializable {
     public void setLocalidad(String localidad) {
         this.localidad = localidad;
     }
+
+    @Override
+    public String toString() {
+        return "Direccion{" +
+                "calle='" + calle + '\'' +
+                ", numero='" + numero + '\'' +
+                ", codigoPostal='" + codigoPostal + '\'' +
+                ", dpto='" + dpto + '\'' +
+                ", piso='" + piso + '\'' +
+                ", localidad='" + localidad + '\'' +
+                '}';
+    }
+
 }

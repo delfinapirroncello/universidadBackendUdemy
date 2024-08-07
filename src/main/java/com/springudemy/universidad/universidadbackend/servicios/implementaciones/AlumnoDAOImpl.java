@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class AlumnoDAOImpl extends PersonaDAOImpl {
+public class AlumnoDAOImpl extends PersonaDAOImpl implements AlumnoDAO {
 
     @Autowired
     public AlumnoDAOImpl(@Qualifier("repositorioAlumnos")PersonaRepository repository) {
         super(repository);
     }
 
-    @Transactional(readOnly = true)
+    @Override
+    @Transactional(readOnly =true)
     public Iterable<Persona> buscarAlumnosPorNombreCarrera(String nombre) {
         return ((AlumnoRepository)repository).buscarAlumnosPorNombreCarrera(nombre);
     }
-
 }

@@ -14,8 +14,8 @@ public class ProfesorDTO extends PersonaDTO{
 
     private BigDecimal sueldo;
 
-    public ProfesorDTO(Integer id, String nombre, String apellido, String dni, Direccion direccion) {
+    public ProfesorDTO(Integer id, String nombre, String apellido, String dni, Direccion direccion, BigDecimal sueldo) {
         super(id, nombre, apellido, dni, direccion);
+        this.sueldo = sueldo;
     }
-
 }

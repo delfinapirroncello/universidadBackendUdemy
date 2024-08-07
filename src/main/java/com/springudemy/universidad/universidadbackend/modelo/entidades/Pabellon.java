@@ -15,17 +15,14 @@ public class Pabellon implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "metros_cuadrados")
-    private Double mt2;
-    @Column(name = "nombre_pabellon")
+    private Double mts2;
+    @Column(name = "nombre_pabellon", unique = true, nullable = false)
     private String nombre;
-    @Column(name = "nombre_localidad")
-    private String localidad;
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "codigoPostal", column = @Column(name = "codigo_postal")),
             @AttributeOverride(name = "dpto", column = @Column(name = "departamento"))
     })
-
     private Direccion direccion;
     @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
@@ -40,12 +37,11 @@ public class Pabellon implements Serializable {
     public Pabellon() {
     }
 
-    public Pabellon(Integer id, Double mt2, String nombre, Direccion direccion) {
+    public Pabellon(Integer id, Double mts2, String nombre, Direccion direccion) {
         this.id = id;
-        this.mt2 = mt2;
+        this.mts2 = mts2;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.localidad = localidad;
     }
 
     public Integer getId() {
@@ -56,12 +52,12 @@ public class Pabellon implements Serializable {
         this.id = id;
     }
 
-    public Double getMt2() {
-        return mt2;
+    public Double getMts2() {
+        return mts2;
     }
 
-    public void setMt2(Double mt2) {
-        this.mt2 = mt2;
+    public void setMts2(Double mts2) {
+        this.mts2 = mts2;
     }
 
     public String getNombre() {
@@ -76,10 +72,6 @@ public class Pabellon implements Serializable {
         return direccion;
     }
 
-    public String getLocalidad(String localidad) {
-        return localidad;
-    }
-
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
@@ -90,49 +82,6 @@ public class Pabellon implements Serializable {
 
     public void setFechaAlta(LocalDateTime fechaAlta) {
         this.fechaAlta = fechaAlta;
-    }
-
-    public LocalDateTime getFechaUltimaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaUltimaModificacion(LocalDateTime fechaUltimaModificacion) {
-        this.fechaModificacion = fechaUltimaModificacion;
-    }
-
-    @PrePersist
-    private void antesDePersistir(){
-        this.fechaAlta = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    private void antesDeUpdate(){
-        this.fechaModificacion = LocalDateTime.now();
-    }
-
-    @Override
-    public String toString() {
-        return "Pabellon{" +
-                "id=" + id +
-                ", mt2=" + mt2 +
-                ", nombre='" + nombre + '\'' +
-                ", direccion=" + direccion +
-                ", fechaAlta=" + fechaAlta +
-                ", fechaUltimaModificacion=" + fechaModificacion +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pabellon pabellon = (Pabellon) o;
-        return Objects.equals(id, pabellon.id) && Objects.equals(nombre, pabellon.nombre);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nombre);
     }
 
     public LocalDateTime getFechaModificacion() {
@@ -151,4 +100,38 @@ public class Pabellon implements Serializable {
         this.aulas = aulas;
     }
 
+    @PrePersist
+    private void antesDePersistir(){
+        this.fechaAlta = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    private void antesDeUpdate(){
+        this.fechaModificacion = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Pabellon{" +
+                "id=" + id +
+                ", mts2=" + mts2 +
+                ", nombre='" + nombre + '\'' +
+                ", direccion=" + direccion +
+                ", fechaAlta=" + fechaAlta +
+                ", fechaUltimaModificacion=" + fechaModificacion +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pabellon pabellon = (Pabellon) o;
+        return id.equals(pabellon.id) && nombre.equals(pabellon.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre);
+    }
 }

@@ -5,10 +5,11 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "profesores")
 @PrimaryKeyJoinColumn(name = "persona_id")
-public class Profesor extends Persona{
+public class Profesor extends Persona {
 
     private BigDecimal sueldo;
     @ManyToMany(
@@ -24,6 +25,7 @@ public class Profesor extends Persona{
             inverseJoinColumns = @JoinColumn(name = "carrera_id")
     )
     private Set<Carrera> carreras;
+
     public Profesor() {
     }
 
@@ -53,7 +55,6 @@ public class Profesor extends Persona{
         return super.toString() +
                 "\tProfesor{" +
                 "sueldo=" + sueldo +
-                ", carreras=" + carreras +
                 '}';
     }
 }

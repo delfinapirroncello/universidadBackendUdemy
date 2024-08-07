@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
+
 @RestController
 @RequestMapping("/carreras")
 @ConditionalOnProperty(prefix = "app", name = "controller.enable-dto", havingValue = "true")
@@ -32,12 +34,12 @@ public class CarreraDtoController extends GenericDtoController<Carrera, CarreraD
 
     @GetMapping
     public ResponseEntity<?> obtenerCarreras(){
-        Map<String,Object> mensaje = new HashMap();
+        Map<String, Object> mensaje = new HashMap();
         List<Carrera> carreras = super.obtenerTodos();
 
-        if (carreras.isEmpty()){
+        if(carreras.isEmpty()){
             mensaje.put("success", Boolean.FALSE);
-            mensaje.put("mensaje", String.format("No existen %ss cargadas", nombre_entidad));
+            mensaje.put("mensaje", String.format("No se econtraron %ss cargadas", nombre_entidad));
             return ResponseEntity.badRequest().body(mensaje);
         }
 
@@ -51,5 +53,4 @@ public class CarreraDtoController extends GenericDtoController<Carrera, CarreraD
 
         return ResponseEntity.ok(mensaje);
     }
-
 }

@@ -5,36 +5,27 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@NotNull(message = "Debe de ingresar un valor")
 @Table(name = "alumnos")
 @PrimaryKeyJoinColumn(name = "persona_id")
-public class Alumno extends Persona{
+public class Alumno extends Persona {
 
     @ManyToOne(
             optional = true,
+            fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
-            },
-            fetch = FetchType.LAZY
+            }
     )
     @JoinColumn(name = "carrera_id")
-
     @JsonIgnoreProperties({"hibernateLazyInitializer", "alumnos"})
     private Carrera carrera;
+
     public Alumno() {
     }
 
     public Alumno(Integer id, String nombre, String apellido, String dni, Direccion direccion) {
         super(id, nombre, apellido, dni, direccion);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() +
-                "Alumno{" +
-                "carrera=" + carrera +
-                '}';
     }
 
     public Carrera getCarrera() {
@@ -45,4 +36,9 @@ public class Alumno extends Persona{
         this.carrera = carrera;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() +
+                "Alumno{}";
+    }
 }

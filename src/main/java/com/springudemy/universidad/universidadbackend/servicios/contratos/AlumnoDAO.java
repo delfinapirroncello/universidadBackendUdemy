@@ -5,9 +5,8 @@ import com.springudemy.universidad.universidadbackend.modelo.entidades.Persona;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AlumnoDAO extends CrudRepository<Alumno, Long> {
+public interface AlumnoDAO extends PersonaDAO {
 
-    Iterable<Alumno> findAllAlumnos();
     Iterable<Persona> buscarAlumnosPorNombreCarrera(String nombre);
+
 }

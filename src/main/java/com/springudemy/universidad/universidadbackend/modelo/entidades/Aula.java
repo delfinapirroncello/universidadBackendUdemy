@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+
 @Entity
 @Table(name = "aulas")
 public class Aula implements Serializable {
@@ -15,22 +16,19 @@ public class Aula implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "numero-aula", nullable = false)
+    @Column(name = "numero_aula", nullable = false)
     private Integer nroAula;
-    @Positive(message = "El valor no puede ser negativo")
     @Column(name = "medidas_mtsxmts")
     private String medidas;
     @Column(name = "cantidad_pupitres")
     private Integer cantidadPupitres;
     @Column(name = "tipo_pizarron")
-    @Positive(message = "El valor no puede ser negativo")
     @Enumerated(EnumType.STRING)
     private Pizarron pizarron;
     @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
     @Column(name = "fecha_modificacion")
     private LocalDateTime fechaModificacion;
-
     @ManyToOne(
             optional = true,
             cascade = {
@@ -38,12 +36,10 @@ public class Aula implements Serializable {
                     CascadeType.MERGE
             }
     )
-
     @JoinColumn(
             name = "pabellon_id",
             foreignKey = @ForeignKey(name = "FK_PABELLON_ID")
     )
-
     private Pabellon pabellon;
 
     public Aula() {
@@ -149,7 +145,7 @@ public class Aula implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Aula aula = (Aula) o;
-        return Objects.equals(id, aula.id) && Objects.equals(nroAula, aula.nroAula);
+        return id.equals(aula.id) && nroAula.equals(aula.nroAula);
     }
 
     @Override

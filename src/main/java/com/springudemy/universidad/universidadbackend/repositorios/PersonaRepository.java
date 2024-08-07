@@ -9,9 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-//@NoRepositoryBean
-@Repository
-@Qualifier("profesorRepository")
+@NoRepositoryBean
 public interface PersonaRepository extends CrudRepository<Persona, Integer> {
 
     @Query("select p from Persona p where p.nombre = ?1 and p.apellido = ?2")
@@ -19,8 +17,7 @@ public interface PersonaRepository extends CrudRepository<Persona, Integer> {
     @Query("select p from Persona p where p.dni = ?1")
     Optional<Persona> buscarPorDni(String dni);
     @Query("select p from Persona p where p.apellido like %?1%")
-    Iterable<Persona> buscarPersonasPorApellido(String apellido);
-
-
+    Iterable<Persona> buscarPersonaPorApellido(String apellido);
 
 }
+

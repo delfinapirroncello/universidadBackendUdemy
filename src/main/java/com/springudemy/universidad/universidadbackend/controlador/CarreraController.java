@@ -16,7 +16,6 @@ import java.util.*;
 @RestController
 @RequestMapping("/carreras")
 @ConditionalOnProperty(prefix = "app", name = "controller.enable-dto", havingValue = "false")
-
 public class CarreraController extends GenericController<Carrera, CarreraDAO>{
 
     @Autowired
@@ -24,33 +23,32 @@ public class CarreraController extends GenericController<Carrera, CarreraDAO>{
         super(service);
         nombreEntidad = "Carrera";
     }
-/*
-    @GetMapping("/{codigo}")
-    public Carrera obtenerPorId(@PathVariable(value = "codigo", required = false) Integer id){
+
+    /*@GetMapping("/{codigo}")
+    public Carrera obtenerPorId(@PathVariable(value = "codigo", required = false) Integer id) {
         Optional<Carrera> oCarrera = service.findById(id);
-        if (!oCarrera.isPresent()){
+        if(!oCarrera.isPresent()){
             throw new BadRequestException(String.format("La carrera con id %d no existe", id));
         }
         return oCarrera.get();
-    }
-*/
+    }*/
+
     @PostMapping
     public ResponseEntity<?> altaCarrera(@Valid @RequestBody Carrera carrera, BindingResult result){
-        /*if (carrera.getCantidadAnios() < 0){
-            throw new BadRequestException("El campo cantidad de años no puede ser negativo");
+        /*if(carrera.getCantidadAnios() < 0) {
+            throw new BadRequestException("El campo cantida de años no puede ser negativo");
         }
-        if (carrera.getCantidadMaterias() < 0){
-            throw new BadRequestException("El campo cantidad de materias no puede ser negativo");
+        if(carrera.getCantidaMaterias() < 0) {
+            throw new BadRequestException("El campo cantida de materias no puede ser negativo");
         }*/
-        //uso del BindingResult para obtener las validaciones realizadas
         Map<String, Object> validaciones = new HashMap<>();
 
-        if (result.hasErrors()){
-            //vamos a obtener una lista de nuestros errores
+        if(result.hasErrors()) {
             result.getFieldErrors()
                     .forEach(error -> validaciones.put(error.getField(), error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(validaciones);
         }
+
         return ResponseEntity.ok(service.save(carrera));
     }
 
@@ -60,7 +58,7 @@ public class CarreraController extends GenericController<Carrera, CarreraDAO>{
         Carrera carreraUpdate = null;
         Optional<Carrera> oCarrera = service.findById(id);
 
-        if (!oCarrera.isPresent()){
+        if(!oCarrera.isPresent()){
             //throw new BadRequestException(String.format("La carrera con id %d no existe", id));
             mensaje.put("success", Boolean.FALSE);
             mensaje.put("mensaje", String.format("%s con ID %d no existe", nombreEntidad, id));
@@ -69,17 +67,17 @@ public class CarreraController extends GenericController<Carrera, CarreraDAO>{
 
         carreraUpdate = oCarrera.get();
         carreraUpdate.setCantidadAnios(carrera.getCantidadAnios());
-        carreraUpdate.setCantidadMaterias(carrera.getCantidadMaterias());
+        carreraUpdate.setCantidaMaterias(carrera.getCantidaMaterias());
 
         mensaje.put("datos", service.save(carreraUpdate));
         mensaje.put("success", Boolean.TRUE);
 
         return ResponseEntity.ok(mensaje);
     }
-/*
-    @DeleteMapping("/carrera/{id}")
-    public void eliminarCarrera(@PathVariable Integer id){
+
+    /*@DeleteMapping("/{id}")
+    public void eliminarCarrera(@PathVariable Integer id) {
         service.deleteById(id);
-    }
-*/
+    }*/
+
 }

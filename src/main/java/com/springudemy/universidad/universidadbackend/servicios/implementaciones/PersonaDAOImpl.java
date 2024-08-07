@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class PersonaDAOImpl extends GenericoDAOImpl<Persona, PersonaRepository> implements PersonaDAO {
 
-
     public PersonaDAOImpl(PersonaRepository repository) {
         super(repository);
     }
@@ -28,16 +27,9 @@ public class PersonaDAOImpl extends GenericoDAOImpl<Persona, PersonaRepository> 
         return repository.buscarPorDni(dni);
     }
 
-
     @Override
     @Transactional(readOnly = true)
-    public Iterable<Persona> buscarPersonasPorApellido(String apellido) {
-        return repository.buscarPersonasPorApellido(apellido);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Iterable<Persona> findAll() {
-        return repository.findAll();
+    public Iterable<Persona> buscarPersonaPorApellido(String apellido) {
+        return repository.buscarPersonaPorApellido(apellido);
     }
 }

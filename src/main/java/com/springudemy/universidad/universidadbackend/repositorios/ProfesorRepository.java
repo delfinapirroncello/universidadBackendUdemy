@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("repositorioProfesores")
+//@Repository("repositorioProfesores")
 public interface ProfesorRepository extends PersonaRepository {
 
-    @Query("select p from Profesor p join fetch p.carreras c where c.nombre = ?1")
-    Iterable<Persona> findProfesoresByCarrera(String carrera);
+    //@Query("select p from Profesor p join fetch p.carreras c where c.nombre = ?1")
+    //Iterable<Persona> findProfesoresByCarrera(String carrera);
 }

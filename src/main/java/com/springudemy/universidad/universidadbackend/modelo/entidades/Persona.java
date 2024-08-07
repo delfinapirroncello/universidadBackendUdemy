@@ -11,15 +11,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "personas")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Persona implements Serializable {
+
+public abstract class Persona implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false,length = 60)
+    @Column(nullable = false, length = 60)
     private String nombre;
-    @Column(nullable = false,length = 60)
+    @Column(nullable = false, length = 60)
     private String apellido;
-    @Column(nullable = false, unique = true ,length = 10)
+    @Column(nullable = false, unique = true, length = 10)
     private String dni;
     @Column(name = "fecha_alta")
     private LocalDateTime fechaAlta;
@@ -127,11 +129,12 @@ public class Persona implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Persona persona = (Persona) o;
-        return Objects.equals(id, persona.id) && Objects.equals(dni, persona.dni);
+        return id.equals(persona.id) && dni.equals(persona.dni);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, dni);
     }
+
 }
